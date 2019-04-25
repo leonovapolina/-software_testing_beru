@@ -1,0 +1,1 @@
+{"uuid":"20dda721-9d6e-4e89-91bc-5999fea16d0d","name":"beru.TasksBeru.setUp","children":["d1807958-3679-47f5-874f-e18d0d66cd0f"],"description":"","befores":[{"name":"setUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1556221384854,"stop":1556221394710}],"afters":[],"links":[],"start":1556221384852,"stop":1556221394712}
