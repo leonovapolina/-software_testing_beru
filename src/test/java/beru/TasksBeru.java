@@ -2,6 +2,8 @@ package beru;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,6 +21,9 @@ public class TasksBeru {
 
     @AfterMethod
     public void tearDown(){
+        Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.xpath("//span[@title='Мой профиль']"))).build().perform();
+        driver.findElement(By.className("header2-user-menu")).findElement(By.linkText("Выход")).click();
         driver.close();
     }
 
