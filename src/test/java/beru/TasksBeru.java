@@ -21,13 +21,13 @@ public class TasksBeru {
 
     @AfterMethod
     public void tearDown(){
-        Actions actions = new Actions(driver);
+        /*Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(By.xpath("//span[@title='Мой профиль']"))).build().perform();
-        driver.findElement(By.className("header2-user-menu")).findElement(By.linkText("Выход")).click();
-        driver.close();
+        driver.findElement(By.className("header2-user-menu")).findElement(By.linkText("Выход")).click();*/
+        //driver.close();
     }
 
-    @Test
+    /*@Test
     public void testAuthorization(){
         //login account
         MainPage page1 = new MainPage(driver);
@@ -67,6 +67,24 @@ public class TasksBeru {
         //compare cities
         SettingsPage settings = new SettingsPage(driver);
         settings.compareCities();
+    }*/
+
+    @Test
+    public void testBrushes(){
+        //go to brushes page
+        MainPage page1 = new MainPage(driver);
+        page1.findBrushes();
+
+        //enter and check the price range
+        BrushesPage brushes = new BrushesPage(driver);
+        brushes.writeRange();
+        brushes.openAllBrushes();
+        //brushes.checkRange();
+
+        //add brush and go to basket
+        //brushes.addBrush();
+        //brushes.goToBasket();
+
     }
 
 }

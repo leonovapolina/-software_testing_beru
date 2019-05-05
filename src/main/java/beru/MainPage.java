@@ -70,5 +70,12 @@ public class MainPage {
         driver.findElement(By.cssSelector("li.header2-user-menu__item.header2-user-menu__item_type_settings")).click();
     }
 
+    @Step
+    public void findBrushes(){
+        driver.findElement(By.id("header-search")).sendKeys("электрические зубные щетки");
+        (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated
+                (By.className("suggest2__content")));
+        driver.findElement(By.className("search2__button")).click();
+    }
 
 }
