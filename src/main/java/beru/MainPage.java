@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.WebElement;
 
 public class MainPage {
     private WebDriver driver;
@@ -77,5 +78,4 @@ public class MainPage {
                 (By.className("suggest2__content")));
         driver.findElement(By.className("search2__button")).click();
     }
-
 }

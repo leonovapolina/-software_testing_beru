@@ -23,6 +23,8 @@ public class BrushesPage {
     public void writeRange(){
         driver.findElement(By.id("glpricefrom")).sendKeys("999");
         driver.findElement(By.id("glpriceto")).sendKeys("1999");
+        (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated
+                ((By.cssSelector("div.NZiH_Kn8Fj"))));
     }
 
     @Step
@@ -30,13 +32,12 @@ public class BrushesPage {
         WebElement showMore = driver.findElement(By.xpath("//div[@class='n-pager-more__button " +
                 "pager-loader_preload']"));
 
-        //while(showMore.isDisplayed()){
+        while(showMore.isDisplayed()){
             showMore.click();
-
             //wait while all brushes will be load
-            //(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy
-                    //(By.cssSelector("div.grid-snippet.grid-snippet_react.b-zone.b-spy-visible")));
-        //}
+            (new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy
+                    (By.cssSelector("div.grid-snippet.grid-snippet_react.b-zone.b-spy-visible")));
+        }
     }
 
     @Step("Check price range")
@@ -54,12 +55,21 @@ public class BrushesPage {
 
     @Step("Add brush")
     public void addBrush(){
-        List<WebElement> cartButtonList = driver.findElements(By.cssSelector("button._4qhIn2-ESi._3OWdR9kZRH." +
-                "THqSbzx07u"));
-        /*List<WebElement> cartButtonList = driver.findElements(By.cssSelector("div.search-result-snippet-cart-button." +
-                "grid-snippet__button"));*/
+        List<WebElement> cartButtonList = driver.findElements(By.cssSelector("div.search-result-snippet-cart-button." +
+                "grid-snippet__button"));
 
         cartButtonList.get(cartButtonList.size() - 2).click();
+
+    }
+
+    @Step
+    public void goToBasket(){
+        (new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy
+                (By.linkText("Перейти в корзину")));
+
+        driver.findElement(By.linkText("Перейти в корзину")).click();
+        (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy
+                (By.cssSelector("div._3AlSA6AOKL")));
     }
 
 }

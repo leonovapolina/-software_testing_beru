@@ -1,9 +1,12 @@
 package beru;
 
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,13 +24,17 @@ public class TasksBeru {
 
     @AfterMethod
     public void tearDown(){
-        /*Actions actions = new Actions(driver);
-        actions.moveToElement(driver.findElement(By.xpath("//span[@title='Мой профиль']"))).build().perform();
-        driver.findElement(By.className("header2-user-menu")).findElement(By.linkText("Выход")).click();*/
-        //driver.close();
+        /*//if((driver.findElement(By.className("header2-nav__user")).getText()).equals("Мой профиль")){
+            Actions actions = new Actions(driver);
+            actions.moveToElement(driver.findElement(By.xpath("//span[@title='Мой профиль']"))).build().perform();
+            //(new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated
+                    //(By.className("header2-user-menu")));
+            driver.findElement(By.className("header2-user-menu")).findElement(By.linkText("Выход")).click();
+        //}*/
+        driver.close();
     }
 
-    /*@Test
+    @Test
     public void testAuthorization(){
         //login account
         MainPage page1 = new MainPage(driver);
@@ -67,7 +74,7 @@ public class TasksBeru {
         //compare cities
         SettingsPage settings = new SettingsPage(driver);
         settings.compareCities();
-    }*/
+    }
 
     @Test
     public void testBrushes(){
@@ -79,12 +86,19 @@ public class TasksBeru {
         BrushesPage brushes = new BrushesPage(driver);
         brushes.writeRange();
         brushes.openAllBrushes();
-        //brushes.checkRange();
+        brushes.checkRange();
 
         //add brush and go to basket
-        //brushes.addBrush();
-        //brushes.goToBasket();
+        brushes.addBrush();
+        brushes.goToBasket();
 
+        //free delivery, total price, add brushes
+        BasketPage basket = new BasketPage(driver);
+        basket.freeDelivery();
+        int totalPrice = basket.checkTotalPrice();
+        basket.addBrushesForFreeDelivery(totalPrice);
+        basket.checkFreeDelivery();
+        basket.checkAllValues();
     }
 
 }
