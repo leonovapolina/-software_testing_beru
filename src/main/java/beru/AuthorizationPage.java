@@ -26,5 +26,4 @@ public class AuthorizationPage {
     public void writePassword(){
         driver.findElement(By.id("passp-field-passwd")).sendKeys("fktrcfylhbz");
     }
-
 }

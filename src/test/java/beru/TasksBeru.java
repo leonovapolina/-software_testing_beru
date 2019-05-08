@@ -1,12 +1,9 @@
 package beru;
 
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,13 +21,12 @@ public class TasksBeru {
 
     @AfterMethod
     public void tearDown(){
-        /*//if((driver.findElement(By.className("header2-nav__user")).getText()).equals("Мой профиль")){
+        if((driver.findElement(By.cssSelector("span.header2-nav-item__icon.header2-nav-item__icon_type_profile")).
+                getAttribute("title")).equals("Мой профиль")){
             Actions actions = new Actions(driver);
             actions.moveToElement(driver.findElement(By.xpath("//span[@title='Мой профиль']"))).build().perform();
-            //(new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated
-                    //(By.className("header2-user-menu")));
             driver.findElement(By.className("header2-user-menu")).findElement(By.linkText("Выход")).click();
-        //}*/
+        }
         driver.close();
     }
 
@@ -100,5 +96,4 @@ public class TasksBeru {
         basket.checkFreeDelivery();
         basket.checkAllValues();
     }
-
 }

@@ -71,5 +71,4 @@ public class BrushesPage {
         (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy
                 (By.cssSelector("div._3AlSA6AOKL")));
     }
-
 }
