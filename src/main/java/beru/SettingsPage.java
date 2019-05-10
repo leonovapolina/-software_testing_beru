@@ -12,7 +12,7 @@ public class SettingsPage {
         this.driver = driver;
     }
 
-    @Step
+    @Step("Compare cities")
     public void compareCities(){
         Assert.assertEquals(driver.findElement(By.xpath("//div[@class='layout layout_type_maya']//span[@class=" +
                 "'link__inner']")).getText(), driver.findElement(By.xpath("//div[@class='settings-list__title']" +

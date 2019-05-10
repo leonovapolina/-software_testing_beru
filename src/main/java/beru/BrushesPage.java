@@ -27,7 +27,7 @@ public class BrushesPage {
                 ((By.cssSelector("div.NZiH_Kn8Fj"))));
     }
 
-    @Step
+    @Step("Open all brushes")
     public void openAllBrushes(){
         WebElement showMore = driver.findElement(By.xpath("//div[@class='n-pager-more__button " +
                 "pager-loader_preload']"));
@@ -62,7 +62,7 @@ public class BrushesPage {
 
     }
 
-    @Step
+    @Step("Go to basket")
     public void goToBasket(){
         (new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy
                 (By.linkText("Перейти в корзину")));

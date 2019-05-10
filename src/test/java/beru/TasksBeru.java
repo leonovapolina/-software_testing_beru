@@ -1,41 +1,24 @@
 package beru;
 
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
 
-import java.util.concurrent.TimeUnit;
+@Listeners({TestListener.class})
+public class TasksBeru extends MethodsClass {
 
-public class TasksBeru {
-    private ChromeDriver driver;
-
-    @BeforeMethod
-    public void setUp(){
-        driver = new ChromeDriver();
-        System.setProperty("webdriver.chrome.driver",
-                "D:\\github\\test_beru\\chromedriver.exe");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("https://beru.ru/");
-    }
-
-    @AfterMethod
-    public void tearDown(){
-        if((driver.findElement(By.cssSelector("span.header2-nav-item__icon.header2-nav-item__icon_type_profile")).
-                getAttribute("title")).equals("Мой профиль")){
-            Actions actions = new Actions(driver);
-            actions.moveToElement(driver.findElement(By.xpath("//span[@title='Мой профиль']"))).build().perform();
-            driver.findElement(By.className("header2-user-menu")).findElement(By.linkText("Выход")).click();
-        }
-        driver.close();
+    @DataProvider(name = "testChangeCity")
+    public Object[][] createData(){
+        return new Object[][]{
+                {"Хвалынск"},
+                {"Волгоград"}
+        };
     }
 
     @Test
     public void testAuthorization(){
         //login account
-        MainPage page1 = new MainPage(driver);
+        MainPage page1 = new MainPage(getDriver());
         page1.clickLogBtn();
-        AuthorizationPage login = new AuthorizationPage(driver);
+        AuthorizationPage login = new AuthorizationPage(getDriver());
         login.writeLogin();
         login.clickLogBtn();
         login.writePassword();
@@ -46,19 +29,19 @@ public class TasksBeru {
         page1.checkProfile();
     }
 
-    @Test
-    public void testChangeCity(){
+    @Test(dataProvider = "testChangeCity")
+    public void testChangeCity(String city){
         //change city
-        MainPage page1 = new MainPage(driver);
+        MainPage page1 = new MainPage(getDriver());
         page1.clickCityButton();
-        page1.writeCity();
+        page1.writeCity(city);
         page1.selectCity();
         page1.changeCity();
-        page1.checkCity();
+        page1.checkCity(city);
 
         //login account
         page1.clickLogBtn();
-        AuthorizationPage login = new AuthorizationPage(driver);
+        AuthorizationPage login = new AuthorizationPage(getDriver());
         login.writeLogin();
         login.clickLogBtn();
         login.writePassword();
@@ -68,18 +51,18 @@ public class TasksBeru {
         page1.clickSettings();
 
         //compare cities
-        SettingsPage settings = new SettingsPage(driver);
+        SettingsPage settings = new SettingsPage(getDriver());
         settings.compareCities();
     }
 
     @Test
     public void testBrushes(){
         //go to brushes page
-        MainPage page1 = new MainPage(driver);
+        MainPage page1 = new MainPage(getDriver());
         page1.findBrushes();
 
         //enter and check the price range
-        BrushesPage brushes = new BrushesPage(driver);
+        BrushesPage brushes = new BrushesPage(getDriver());
         brushes.writeRange();
         brushes.openAllBrushes();
         brushes.checkRange();
@@ -89,7 +72,7 @@ public class TasksBeru {
         brushes.goToBasket();
 
         //free delivery, total price, add brushes
-        BasketPage basket = new BasketPage(driver);
+        BasketPage basket = new BasketPage(getDriver());
         basket.freeDelivery();
         int totalPrice = basket.checkTotalPrice();
         basket.addBrushesForFreeDelivery(totalPrice);

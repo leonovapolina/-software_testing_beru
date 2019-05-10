@@ -41,8 +41,8 @@ public class MainPage {
     }
 
     @Step("Find and write city")
-    public void writeCity(){
-        driver.findElement(By.xpath("//input[@class='input__control']")).sendKeys("Хвалынск");
+    public void writeCity(String city){
+        driver.findElement(By.xpath("//input[@class='input__control']")).sendKeys(city);
     }
 
     @Step("Select city")
@@ -52,26 +52,26 @@ public class MainPage {
         driver.findElement(By.cssSelector("div.region-suggest__list-item")).click();
     }
 
-    @Step
+    @Step("Change city")
     public void changeCity(){
         driver.findElement(By.xpath("//div[@class='header2-region-popup']//button")).click();
     }
 
     @Step("Check city")
-    public void checkCity(){
+    public void checkCity(String city){
         (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated
                 (By.className("footer__wrapper")));
-        Assert.assertEquals(driver.findElement(By.className("link__inner")).getText(), "Хвалынск");
+        Assert.assertEquals(driver.findElement(By.className("link__inner")).getText(), city);
     }
 
-    @Step
+    @Step("Go to settings")
     public void clickSettings(){
         Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(By.xpath("//span[@title='Мой профиль']"))).build().perform();
         driver.findElement(By.cssSelector("li.header2-user-menu__item.header2-user-menu__item_type_settings")).click();
     }
 
-    @Step
+    @Step("Find brushes")
     public void findBrushes(){
         driver.findElement(By.id("header-search")).sendKeys("электрические зубные щетки");
         (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated
