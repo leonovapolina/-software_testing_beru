@@ -10,14 +10,13 @@ import org.testng.Assert;
 
 public class BasketPage {
     private WebDriver driver;
+    private By basketInfo = By.cssSelector("div._1n63a5bOO8");
+    private By price = By.cssSelector("span._1oBlNqVHPq");
+    private By brushCost = By.xpath("//div[contains(@data-auto, 'total-items')]//span[2]");
 
     public BasketPage(WebDriver driver){
         this.driver = driver;
     }
-
-    private By basketInfo = By.cssSelector("div._1n63a5bOO8");
-    private By price = By.cssSelector("span._1oBlNqVHPq");
-    private By brushCost = By.xpath("//div[contains(@data-auto, 'total-items')]//span[2]");
 
     @Step("Check 'until free delivery left'")
     public void freeDelivery(){
